@@ -1,6 +1,6 @@
 # Website blog - Work in progress
 
-The blog in the current state allows a user to:
+# The blog in the current state allows a user to:
 
 - browse through existing posts
 - add a new post and a new comment
@@ -9,7 +9,23 @@ The blog in the current state allows a user to:
 - delete a single comment
 - up vote on the existing post and on the existing comment
 
-###Views
+# Readable API Server
+
+## Installation
+
+Git clone this repository to gain access to the simple backend our app is going to communicate with: `https://github.com/udacity/reactnd-project-readable-starter.git`
+Install packages: `npm install`
+Launch server: `node server`
+Unless modified in `config.js` server will use port 5001
+
+## Intallation part 2
+
+Git clone this repo: `git@github.com:bkluczynski/Poster.git`
+Install packages: `npm install`
+Launch app in the directory where you've cloned the repo: `yarn start`
+Unless modified in `config.js` server will use port 3000
+
+Views
 -----
 
 Your application should have, at a minimum, four views:
@@ -37,10 +53,4 @@ Your application should have, at a minimum, four views:
 
  Posts and comments, in all views where they are displayed, should display their current score and should have controls to increment or decrement the `voteScore` for the object. Posts should display the number of comments associated with the post.
 
-# Readable API Server
 
-## Installation
-
-Install packages: `npm install`
-Launch server: `node server`
-Unless modified in `config.js` server will use port 5001
