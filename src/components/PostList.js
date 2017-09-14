@@ -67,10 +67,7 @@ class PostList extends Component {
                                                         </Link>
                                                     </List.Header>
                                                     <List.Description>
-                                                        submitted {showSecondsMinutesOrHours(Date.now(), post.timestamp)}
-                                                        ago by {post.author}
-                                                        has {comments.filter(com => com.parentId === post.id).length}
-                                                        comment(s).
+                                                        <p>submitted {showSecondsMinutesOrHours(Date.now(), post.timestamp)} ago by {post.author} has {comments.filter(com => com.parentId === post.id).length} comment(s).</p>
                                                     </List.Description>
                                                     <List.Description>
                                                         <List horizontal>
