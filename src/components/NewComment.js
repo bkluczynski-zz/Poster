@@ -5,10 +5,10 @@ import {Link, withRouter} from 'react-router-dom'
 
 function validate(values){
   const errors = {}
-  if (!values.title) {
+  if (!values.body) {
     errors.body = 'Body is required'
   }
-  if (!values.title) {
+  if (!values.author) {
     errors.author = 'Author is required'
   }
 
@@ -25,9 +25,9 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 </div>
 )
 
-let NewComment = props => {
-  const { handleSubmit } = props
+const NewComment = props => {
 
+  const { handleSubmit, pristine, reset, submitting } = props
 
   console.log("props inside", this.props)
 
@@ -44,10 +44,7 @@ let NewComment = props => {
   )
 }
 
-NewComment = reduxForm({
-  // a unique name for the form
-  form: 'newComment',
-  validate
+export default reduxForm({
+  form: 'newPost',
+  validate,
 })(NewComment)
-
-export default NewComment

@@ -21,7 +21,7 @@ export const VOTE_COMMENT = 'VOTE_COMMENT'
 function sentPostsCorrectly(posts){
   return {
   type : POPULATE_POSTS,
-  posts
+  posts : posts.sort(sortBy('-voteScore'))
 }
 }
 

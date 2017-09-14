@@ -24,11 +24,14 @@ import {
     Icon
 } from 'semantic-ui-react'
 import {colorSwitcher, showSecondsMinutesOrHours} from '../utils/helpers'
+import sortBy from 'sort-by'
 
 class PostList extends Component {
 
+
     render() {
         const {posts, comments} = this.props
+
         const {category} = this.props.match.params
 
         function isCategoryMounted(posts) {
@@ -36,6 +39,8 @@ class PostList extends Component {
                 ? posts
                 : posts.filter(post => post.category === category)
         }
+
+
         return (
             <div>
                 <Container textAlign='left'>
@@ -55,7 +60,8 @@ class PostList extends Component {
                                     </Button>
                                 </div>
                             )}
-                            <Divider horizontal/> {posts && isCategoryMounted(posts).map(post => (
+                            <Divider horizontal/>
+                              {posts && isCategoryMounted(posts).map(post => (
                                 <div key={post.id}>
                                     <List divided relaxed>
                                         <List.Item>

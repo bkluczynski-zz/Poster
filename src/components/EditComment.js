@@ -16,10 +16,10 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
 
 function validate(values){
   const errors = {}
-  if (!values.title) {
+  if (!values.body) {
     errors.body = 'Body is required'
   }
-  if (!values.title) {
+  if (!values.author) {
     errors.author = 'Author is required'
   }
 
