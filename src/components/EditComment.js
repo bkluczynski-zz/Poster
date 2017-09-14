@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-
+import { Button, Checkbox, Form, Container, Divider } from 'semantic-ui-react'
+import {Link, withRouter} from 'react-router-dom'
 
 let EditComment = props => {
   const { handleSubmit } = props
@@ -9,17 +10,15 @@ let EditComment = props => {
   console.log("props inside", this.props)
 
   return (
-    <form onSubmit={ handleSubmit }>
-      <div>
-        <label htmlFor="body">Body</label>
-        <Field name="body" component="textarea" type="text" />
-      </div>
-      <div>
-        <label htmlFor="author">Author</label>
-        <Field name="author" component="input" type="text" />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    <Container>
+      <Divider horizontal/>
+      <Form onSubmit={ handleSubmit }>
+          <Form.Field control={Field} label="Comment" placeholder="I want to write about..." component="input" type="text" name="body"/>
+          <Form.TextArea control={Field} label="Name" placeholder="Name" component="input" type="text" name="author"/>
+          <Form.Button>Submit</Form.Button>
+          <Form.Button as={Link} to="/">Back</Form.Button>
+      </Form>
+    </Container>
   )
 }
 
