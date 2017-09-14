@@ -1,40 +1,35 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import { Button, Checkbox, Form, Container, Divider } from 'semantic-ui-react'
+import {Link, withRouter} from 'react-router-dom'
+
 
 
 let NewPost = props => {
   const { handleSubmit } = props
 
-
   console.log("props inside", this.props)
 
   return (
-    <form onSubmit={ handleSubmit }>
-      <div>
-        <label htmlFor="title">Title</label>
-        <Field name="title" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="body">Body</label>
-        <Field name="body" component="textarea" type="text" />
-      </div>
-      <div>
-        <label htmlFor="author">Author</label>
-        <Field name="author" component="input" type="text" />
-      </div>
-      <div>
-        <label htmlFor="category">Category</label>
-          <div>
+    <Container>
+      <Divider horizontal/>
+      <Form onSubmit={ handleSubmit }>
+          <Form.Field control={Field} label="Title" placeholder="Title" component="input" type="text" name="title"/>
+          <Form.Field control={Field} label="Post" placeholder="I want to write about..." component="input" type="text" name="body"/>
+          <Form.TextArea control={Field} label="Name" placeholder="Name" component="input" type="text" name="author"/>
+          <Form.Field>
+            <label>Category</label>
             <Field name="category" component="select">
-              <option />
               <option value="react">react</option>
               <option value="redux">redux</option>
               <option value="udacity">udacity</option>
             </Field>
-          </div>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+          </Form.Field>
+          <Form.Button>Submit</Form.Button>
+          <Form.Button as={Link} to="/">Back</Form.Button>
+      </Form>
+    </Container>
+
   )
 }
 

@@ -25,7 +25,7 @@ class Category extends Component {
           </List.Item>
         {categories.map(
           category => (
-              <List.Item>
+              <List.Item key={category.name}>
                   <Link to={`${category.path}`}>
                     <p>{category.name}</p>
                   </Link>
