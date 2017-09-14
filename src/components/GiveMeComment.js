@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { populatePosts, populateComments, sortComments, deleteComment, voteComment } from '../actions'
 import { Link, withRouter } from 'react-router-dom'
 import sortBy from 'sort-by'
+import { Container, Divider, Button, Segment, List ,Statistic, Icon, Comment, Header} from 'semantic-ui-react'
+import { colorSwitcher, showSecondsMinutesOrHours} from '../utils/helpers'
+
 
 
 class GiveMeComment extends Component {
@@ -16,30 +19,47 @@ class GiveMeComment extends Component {
       return (
         <div className="App">
           {comments.length >= 1 && (
-            <div>
-              {console.log("im here")}
-              <select onChange= {(event) => {this.props.sortComments(comments, event.target.value)}}>
-                  <option value="timestamp">Order by timestamp</option>
-                  <option value="-voteScore">Order by voteScore</option>
-              </select>
+            <Comment.Group>
+            <Header as='h3' dividing>Comments</Header>
+                <div>
+                <Button size='tiny' onClick={(event) => {this.props.sortComments(comments, "-timestamp")}}>Show most recent</Button>
+                <Button size='tiny' onClick={(event) => {this.props.sortComments(comments, "-voteScore")}}>Show most popular</Button>
+              </div>
             {this.props.comments.filter(comment => comment.parentId === this.props.postId).map(comment => (
-            <li key={comment.id}>
-              <p>Author : {comment.author}</p>
-              <p>Body : {comment.body}</p>
-              <p>The voteScore is : {comment.voteScore}</p>
-              <button onClick={() => this.props.voteComment(comment.id, "upVote")}>+</button>
-              <button onClick={() => this.props.voteComment(comment.id, "downVote")}>-</button>
-            <Link to={`/${this.props.category}/edit/comments/${comment.id}`}>
-              Edit
-            </Link>
-            <Link to={`${this.props.postId}`} onClick={() => this.props.deleteComment(comment.id)}>
-              Delete
-            </Link>
-              </li>
-          ))}
+          <Segment color={colorSwitcher(comment.voteScore)}>
+            <Comment key={comment.id}>
+              <Comment.Content>
+                <Comment.Author>{comment.author}</Comment.Author>
+                  <Comment.Metadata>
+                    <div>{showSecondsMinutesOrHours(Date.now(),comment.timestamp)} ago</div>
+                  </Comment.Metadata>
+                  <Comment.Text>
+                    {comment.body}
+                    <Divider horizontal />
+                    <div><Statistic horizontal size='mini' color={colorSwitcher(comment.voteScore)} value={comment.voteScore}  label='point(s) to commenting greatness'/></div>
+                    <div><button onClick={() => this.props.voteComment(comment.id, "upVote")}>
+                      <Icon name='thumbs outline up'/>
+                      </button>
+                    <button onClick={() => this.props.voteComment(comment.id, "downVote")}>
+                      <Icon name='thumbs outline down'/>
+                    </button></div>
+                  </Comment.Text>
+              </Comment.Content>
+              <Container textAlign='right'>
+                <Button size='mini' as={Link} to={`${this.props.postId}`} onClick={() => this.props.deleteComment(comment.id)}>
+                  Delete
+                </Button>
+                <Button size='mini'as={Link} to={`/${this.props.category}/edit/comments/${comment.id}`}>
+                  Edit
+                </Button>
+              </Container>
+            </Comment>
+          </Segment>
+        ))}
+          </Comment.Group>
+            )}
         </div>
-      )}
-    </div>
+
   )}}
 
 const mapStateToProps = (state,props) => ({

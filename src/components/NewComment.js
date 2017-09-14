@@ -11,10 +11,6 @@ let NewComment = props => {
   return (
     <form onSubmit={ handleSubmit }>
       <div>
-        <label htmlFor="title">Title</label>
-        <Field name="title" component="input" type="text" />
-      </div>
-      <div>
         <label htmlFor="body">Body</label>
         <Field name="body" component="textarea" type="text" />
       </div>

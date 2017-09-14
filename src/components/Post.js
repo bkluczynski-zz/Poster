@@ -9,6 +9,9 @@ import { Link, withRouter } from 'react-router-dom'
 import sortBy from 'sort-by'
 import {load as loadPost} from '../actions'
 import NewCommentPage from './NewCommentPage'
+import { Container, Divider, Button, Segment, List ,Statistic, Icon} from 'semantic-ui-react'
+import { colorSwitcher, showSecondsMinutesOrHours } from '../utils/helpers'
+
 
 
 
@@ -25,30 +28,66 @@ class Post extends Component {
     console.log("these are the props", this.props)
     return (
       <div className="App">
-        {post.map(post => (
-          <div key={post.id}>
-            <p>Title : {post.title}</p>
-            <p>Body : {post.body}</p>
-            <p>Author : {post.author}</p>
-            <p>Number of comments : {comments.filter(com => com.parentId === this.props.match.params.id).length}</p>
-            <p>Scoring : {post.voteScore}</p>
-              <button onClick={() => this.props.votePost(post.id, "upVote")}>+</button>
-              <button onClick={() => this.props.votePost(post.id, "downVote")}>-</button>
-              
-              <Link to="/" onClick={() => {
-                  this.props.deletePost(this.props.match.params.id)
-                }}>
-                Delete Me
-              </Link>
-              <Link to={`/posts/${this.props.match.params.id}`}>
-                Edit Me
-              </Link>
-          </div>
-        ))}
-        <Link to={`/${this.props.match.params.category}/create/comments/${this.props.match.params.id}`}>
-          Add Comment
-        </Link>
-        <GiveMeComment postId={this.props.match.params.id} category={this.props.match.params.category} comments={comments.sort(sortBy('-voteScore'))}/>
+        <Container textAlign='left'>
+          <br></br>
+            <List divided relaxed>
+              {post.map(post => (
+                <div key={post.id}>
+              <List.Item>
+                <List.Content>
+                  <Segment color={colorSwitcher(post.voteScore)}>
+                  <List.Header>
+                            <p className='postTitle'>{post.title}</p>
+                    </List.Header>
+                    {post.body}
+                    <Divider horizontal/>
+                  <List.Description>
+                    submitted {showSecondsMinutesOrHours(Date.now(), post.timestamp)} ago by {post.author} has {comments.filter(com => com.parentId === this.props.match.params.id).length} comment(s).
+                  </List.Description>
+                  <List.Description>
+                    <List horizontal>
+                      <List.Item>
+                          <Statistic horizontal size='mini' color={colorSwitcher(post.voteScore)} value={post.voteScore}  label='point(s) to awesomness'/>
+                      </List.Item>
+                      <List.Item>
+                        <button onClick={() => this.props.votePost(post.id, "upVote")}>
+                          <Icon name='thumbs outline up'/>
+                          </button>
+                        <button onClick={() => this.props.votePost(post.id, "downVote")}>
+                          <Icon name='thumbs outline down'/>
+                        </button>
+                      </List.Item>
+                    </List>
+                  </List.Description>
+                  <Container>
+                    <Container textAlign='left'>
+                      <Button as={Link}
+                        to={`/${post.category}/create/comments/${post.id}`}>
+                          Add Comment
+                      </Button>
+                    </Container>
+                    <Container textAlign='right'>
+                      <Button as={Link} to="/" size='medium'>
+                        Home
+                      </Button>
+                      <Button size='mini' as={Link} to="/" onClick={() => {
+                          this.props.deletePost(post.id)
+                        }}>
+                        Delete
+                      </Button>
+                      <Button size='mini' as={Link} to={`/posts/${post.id}`}>
+                        Edit Me
+                      </Button>
+                    </Container>
+                  </Container>
+                  </Segment>
+                </List.Content>
+              </List.Item>
+            </div>
+                ))}
+            </List>
+          <GiveMeComment postId={this.props.match.params.id} category={this.props.match.params.category} comments={comments.sort(sortBy('-voteScore'))}/>
+        </Container>
       </div>
     );
   }
