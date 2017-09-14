@@ -75,6 +75,9 @@ class PostList extends Component {
                 <div>
                 <Button size='tiny' onClick={(event) => {this.props.sortPosts(posts, "-timestamp")}}>Show most recent</Button>
                 <Button size='tiny' onClick={(event) => {this.props.sortPosts(posts, "-voteScore")}}>Show most popular</Button>
+                <Button as={Link} to={'/post/create'}>
+                  Create new post
+                </Button>
               </div>
           )}
           <Divider horizontal />
@@ -83,6 +86,7 @@ class PostList extends Component {
                         <List divided relaxed>
                           <List.Item>
                             <List.Content>
+                              <Segment color={colorSwitcher(post.voteScore)}>
                               <List.Header>
                                     <p className='postTitle'>{post.title}</p>
                                 </List.Header>
@@ -104,27 +108,26 @@ class PostList extends Component {
                                   </List.Item>
                                 </List>
                               </List.Description>
+                              <Button size='mini' as={Link} to={`/${post.category}/${post.id}`}>
+                                See details
+                              </Button>
+                              <Button size='mini' as={Link} to="/" onClick={() => {
+                                  this.props.deletePost(post.id)
+                                }}>
+                                Delete
+                              </Button>
+                              <Button size='mini' as={Link} to={`/posts/${post.id}`}>
+                                Edit Me
+                              </Button>
+                              </Segment>
+                              <br></br>
                             </List.Content>
                           </List.Item>
-                        <Button size='mini' as={Link} to={`/${post.category}/${post.id}`}>
-                          See details
-                        </Button>
-                        <Button size='mini' as={Link} to="/" onClick={() => {
-                            this.props.deletePost(post.id)
-                          }}>
-                          Delete
-                        </Button>
-                        <Button size='mini' as={Link} to={`/posts/${post.id}`}>
-                          Edit Me
-                        </Button>
                         </List>
                       </div>
                     ))}
           </ol>
         </Segment>
-          <Link to={'/post/create'}>
-            Create new post
-          </Link>
         </Container>
       </div>
     );
