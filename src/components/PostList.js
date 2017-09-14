@@ -88,7 +88,9 @@ class PostList extends Component {
                             <List.Content>
                               <Segment color={colorSwitcher(post.voteScore)}>
                               <List.Header>
-                                    <p className='postTitle'>{post.title}</p>
+                                      <Link to={`/${post.category}/${post.id}`}>
+                                        <p className='postTitle'>{post.title}</p>
+                                      </Link>
                                 </List.Header>
                               <List.Description>
                                 submitted {showSecondsMinutesOrHours(Date.now(), post.timestamp)} ago by {post.author} has {comments.filter(com => com.parentId === post.id).length} comment(s).
@@ -108,17 +110,16 @@ class PostList extends Component {
                                   </List.Item>
                                 </List>
                               </List.Description>
-                              <Button size='mini' as={Link} to={`/${post.category}/${post.id}`}>
-                                See details
-                              </Button>
-                              <Button size='mini' as={Link} to="/" onClick={() => {
-                                  this.props.deletePost(post.id)
-                                }}>
-                                Delete
-                              </Button>
-                              <Button size='mini' as={Link} to={`/posts/${post.id}`}>
-                                Edit Me
-                              </Button>
+                              <Container textAlign='right'>
+                                <Button size='mini' as={Link} to="/" onClick={() => {
+                                    this.props.deletePost(post.id)
+                                  }}>
+                                  Delete
+                                </Button>
+                                <Button size='mini' as={Link} to={`/posts/${post.id}`}>
+                                  Edit Me
+                                </Button>
+                              </Container>
                               </Segment>
                               <br></br>
                             </List.Content>
