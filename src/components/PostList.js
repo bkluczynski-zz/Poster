@@ -6,7 +6,7 @@ import Category from './Category'
 import GiveMeComment from './GiveMeComment'
 import Post from './Post'
 import {Link, withRouter} from 'react-router-dom'
-import { Container, Divider, Button, Segment, List } from 'semantic-ui-react'
+import { Container, Divider, Button, Segment, List ,Statistic, Icon} from 'semantic-ui-react'
 
 
 class PostList extends Component {
@@ -37,6 +37,30 @@ class PostList extends Component {
     }
 
 
+    function colorSwitcher(value) {
+  let answer = "";
+  switch( value ) {
+    case 1: case 2: case 3: case 4: case 5:
+      answer = "olive";
+      break;
+    case 5: case 6: case 7: case 8: case 9:
+      answer = "teal";
+      break;
+    case 10: case 11: case 12: case 13: case 14: case 15:
+      answer = "yellow";
+      break;
+      case 16: case 17: case 18: case 19: case 20: case 21:
+        answer = "purple";
+        break;
+      case 22: case 23: case 24: case 25: case 26: case 27: case 28:
+      answer = "pink"
+    default:
+      answer = "green";
+  }
+  return answer;
+  }
+
+
     return (
       <div>
         <Container textAlign='left'>
@@ -49,7 +73,6 @@ class PostList extends Component {
                 <Button size='tiny' onClick={(event) => {this.props.sortPosts(posts, "-timestamp")}}>Show most recent</Button>
                 <Button size='tiny' onClick={(event) => {this.props.sortPosts(posts, "-voteScore")}}>Show most popular</Button>
               </div>
-
           )}
           <Divider horizontal />
               {posts && isCategoryMounted(posts).map(post => (
@@ -57,15 +80,30 @@ class PostList extends Component {
                         <List divided relaxed>
                           <List.Item>
                             <List.Content>
-                              <List.Header><p className='postTitle'>{post.title}</p></List.Header>
-                              <List.Description> submitted {showSecondsMinutesOrHours(Date.now(), post.timestamp)} ago by {post.author} has {comments.filter(com => com.parentId === post.id).length} comments.
-                                <List.Description>{post.voteScore} points to awesomness</List.Description>
+                              <List.Header>
+                                    <p className='postTitle'>{post.title}</p>
+                                </List.Header>
+                              <List.Description>
+                                submitted {showSecondsMinutesOrHours(Date.now(), post.timestamp)} ago by {post.author} has {comments.filter(com => com.parentId === post.id).length} comment(s).
+                              </List.Description>
+                              <List.Description>
+                                <List horizontal>
+                                  <List.Item>
+                                      <Statistic horizontal size='mini' color={colorSwitcher(post.voteScore)} value={post.voteScore}  label='points to awesomness'/>
+                                  </List.Item>
+                                  <List.Item>
+                                    <button onClick={() => this.props.votePost(post.id, "upVote")}>
+                                      <Icon name='thumbs outline up'/>
+                                      </button>
+                                    <button onClick={() => this.props.votePost(post.id, "downVote")}>
+                                      <Icon name='thumbs outline down'/>
+                                    </button>
+                                  </List.Item>
+                                </List>
                               </List.Description>
                             </List.Content>
                           </List.Item>
                         </List>
-                        <button onClick={() => this.props.votePost(post.id, "upVote")}>+</button>
-                        <button onClick={() => this.props.votePost(post.id, "downVote")}>-</button>
                         <Link to={`/${post.category}/${post.id}`}>
                           See details
                         </Link>
