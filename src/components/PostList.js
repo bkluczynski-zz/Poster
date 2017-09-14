@@ -40,6 +40,9 @@ class PostList extends Component {
     function colorSwitcher(value) {
   let answer = "";
   switch( value ) {
+    case -1: case -2: case -3: case -4: case -5:
+      answer = 'red'
+      break;
     case 1: case 2: case 3: case 4: case 5:
       answer = "olive";
       break;
@@ -103,18 +106,18 @@ class PostList extends Component {
                               </List.Description>
                             </List.Content>
                           </List.Item>
-                        </List>
-                        <Link to={`/${post.category}/${post.id}`}>
+                        <Button size='mini' as={Link} to={`/${post.category}/${post.id}`}>
                           See details
-                        </Link>
-                        <Link to="/" onClick={() => {
+                        </Button>
+                        <Button size='mini' as={Link} to="/" onClick={() => {
                             this.props.deletePost(post.id)
                           }}>
-                          Delete Me
-                        </Link>
-                        <Link to={`/posts/${post.id}`}>
+                          Delete
+                        </Button>
+                        <Button size='mini' as={Link} to={`/posts/${post.id}`}>
                           Edit Me
-                        </Link>
+                        </Button>
+                        </List>
                       </div>
                     ))}
           </ol>
