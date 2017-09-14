@@ -13,17 +13,17 @@
 
 ## Installation
 
-Git clone this repository to gain access to the simple backend our app is going to communicate with: `https://github.com/udacity/reactnd-project-readable-starter.git`
-Install packages: `npm install`
-Launch server: `node server`
-Unless modified in `config.js` server will use port 5001
+- Git clone this repository to gain access to the simple backend our app is going to communicate with `https://github.com/udacity/reactnd-project-readable-starter.git`
+- Install packages: `npm install`
+- Launch server: `node server`
+- Unless modified in `config.js` server will use port 5001
 
 ## Intallation part 2
 
-Git clone this repo: `git@github.com:bkluczynski/Poster.git`
-Install packages: `npm install`
-Launch app in the directory where you've cloned the repo: `yarn start`
-Unless modified in `config.js` server will use port 3000
+- Git clone this repo: `git@github.com:bkluczynski/Poster.git`
+- Install packages: `npm install`
+- Launch app in the directory where you've cloned the repo: `yarn start`
+- Unless modified in `config.js` server will use port 3000
 
 Views
 -----
