@@ -1,6 +1,8 @@
 # Website blog - Work in progress
 
-# The blog in the current state allows a user to:
+The challenge of this project was to use Redux to manage the application state. This includes all user actions and responses from the API server. There is no state handled by the components. All of the state for the application is controlled by reducers.
+
+The blog in the current state allows a user to:
 
 - browse through existing posts
 - add a new post and a new comment
