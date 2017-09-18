@@ -23,7 +23,6 @@ class NewPostPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   addPost: (post) => dispatch(addPost(post)),
-  editPost: (id, post) => dispatch(editPost(id,post))
 })
 
 

@@ -1,27 +1,52 @@
-export function colorSwitcher(value) {
-let answer = "";
-switch( value ) {
-case -1: case -2: case -3: case -4: case -5:
-  answer = 'red'
-  break;
-case 1: case 2: case 3: case 4: case 5:
-  answer = "olive";
-  break;
-case 5: case 6: case 7: case 8: case 9:
-  answer = "teal";
-  break;
-case 10: case 11: case 12: case 13: case 14: case 15:
-  answer = "yellow";
-  break;
-  case 16: case 17: case 18: case 19: case 20: case 21:
-    answer = "purple";
-    break;
-  case 22: case 23: case 24: case 25: case 26: case 27: case 28:
-  answer = "pink"
-default:
-  answer = "green";
+export const colorSwitcher = (value) => {
+  const colors = [
+    'red',
+    'olive',
+    'teal',
+    'yellow',
+    'purple',
+    'pink',
+    'green',
+  ];
+  const validations = [
+    (value <= -1 && value >= -5),
+    (value >= 1 && value <= 5),
+    (value >= 6 && value <= 10),
+    (value >= 11 && value <= 15),
+    (value >= 16 && value <= 20),
+    (value >= 21 && value <= 25),
+    (value >= 26 && value <= 30),
+  ];
+
+  return validations
+  .map((v, k) => ((v && colors[k]) || false))
+  .find(v => typeof v == 'string') || 'green';
 }
-return answer;
+
+export function validateComment(values){
+  const errors = {}
+  if (!values.body) {
+    errors.body = 'Body is required'
+  }
+  if (!values.author) {
+    errors.author = 'Author is required'
+  }
+
+  return errors
+}
+
+export function validate(values){
+  const errors = {}
+  if (!values.title) {
+    errors.title = 'Title is required'
+  }
+  if (!values.title) {
+    errors.body = 'Body is required'
+  }
+  if (!values.title) {
+    errors.author = 'Author is required'
+  }
+  return errors
 }
 
 

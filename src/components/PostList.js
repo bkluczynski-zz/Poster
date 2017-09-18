@@ -35,7 +35,7 @@ class PostList extends Component {
         const {category} = this.props.match.params
 
         function isCategoryMounted(posts) {
-            return category === undefined
+            return !category 
                 ? posts
                 : posts.filter(post => post.category === category)
         }

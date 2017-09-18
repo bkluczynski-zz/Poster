@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form'
 import { Button, Checkbox, Form, Container, Divider } from 'semantic-ui-react'
 import {Link, withRouter} from 'react-router-dom'
 
+
 function validate(values){
   const errors = {}
   if (!values.body) {

@@ -2,21 +2,8 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { Button, Checkbox, Form, Container, Divider } from 'semantic-ui-react'
 import {Link, withRouter} from 'react-router-dom'
+import { validate } from '../utils/helpers'
 
-  function validate(values){
-    const errors = {}
-    if (!values.title) {
-      errors.title = 'Title is required'
-    }
-    if (!values.title) {
-      errors.body = 'Body is required'
-    }
-    if (!values.title) {
-      errors.author = 'Author is required'
-    }
-
-    return errors
-  }
 
   const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
   <div>
@@ -28,8 +15,6 @@ import {Link, withRouter} from 'react-router-dom'
   </div>
 )
 
-
-  console.log("props inside", this.props)
 
 const NewPost = (props) => {
   const { handleSubmit, pristine, reset, submitting } = props
@@ -44,7 +29,7 @@ const NewPost = (props) => {
           <Form.Field>
             <label>Category</label>
             <Field name="category" component="select">
-              <option value="react">react</option>
+              <option defaultValue="react">react</option>
               <option value="redux">redux</option>
               <option value="udacity">udacity</option>
             </Field>

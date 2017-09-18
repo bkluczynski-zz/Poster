@@ -36,7 +36,7 @@ class GiveMeComment extends Component {
                                 this.props.sortComments(comments, "-voteScore")
                             }}>Show most popular</Button>
                         </div>
-                        {this.props.comments.filter(comment => comment.parentId === this.props.postId).map(comment => (
+                        {this.props.comments.map(comment => (
                             <Segment key={comment.id} color={colorSwitcher(comment.voteScore)}>
                                 <Comment key={comment.id}>
                                     <Comment.Content>
@@ -79,7 +79,7 @@ class GiveMeComment extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    comments: Object.keys(state.post.comments).map(id => state.post.comments[id])
+    comments: Object.keys(state.post.comments).map(id => state.post.comments[id]).filter(comment => comment.parentId === props.postId)
 })
 
 const mapDispatchToProps = (dispatch) => ({
